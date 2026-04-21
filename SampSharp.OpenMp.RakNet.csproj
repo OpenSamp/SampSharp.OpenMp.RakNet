@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <RootNamespace>SampSharp.RakNet.Entities</RootNamespace>
+        <AssemblyName>SampSharp.OpenMp.RakNet</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\openmp-sampsharp-x64-poc\src\SampSharp.OpenMp.Core\SampSharp.OpenMp.Core.csproj" />
+        <ProjectReference Include="..\openmp-sampsharp-x64-poc\src\SampSharp.OpenMp.Entities\SampSharp.OpenMp.Entities.csproj" />
+    </ItemGroup>
+
+</Project>
