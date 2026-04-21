@@ -71,12 +71,16 @@ internal sealed class RakNetEventSystem : ISystem
 
     // Event dispatch returns object? from Invoke; we treat it as bool where
     // false means "veto". Default (null/true) propagates.
+    //
+    // BitStream handle is passed as a raw int so legacy [Event] handlers with
+    // `int bs` signatures continue to work. Handlers that want a managed wrapper
+    // can do `BitStream.Borrow(bsHandle)` at entry.
     private static byte InvokeVeto(string name, int playerId, int id, int bsHandle)
     {
         if (_dispatcher is null) return 1;
         try
         {
-            var result = _dispatcher.Invoke(name, PlayerEntity(playerId), id, BitStream.Borrow(bsHandle));
+            var result = _dispatcher.Invoke(name, PlayerEntity(playerId), id, bsHandle);
             return result is false ? (byte)0 : (byte)1;
         }
         catch

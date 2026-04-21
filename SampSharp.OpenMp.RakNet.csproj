@@ -9,6 +9,11 @@
         <AssemblyName>SampSharp.OpenMp.RakNet</AssemblyName>
     </PropertyGroup>
 
+    <!-- Legacy Pawn-compat слой использует Vector3/Vector4 в синках. -->
+    <ItemGroup>
+        <Using Include="System.Numerics" />
+    </ItemGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\openmp-sampsharp-x64-poc\src\SampSharp.OpenMp.Core\SampSharp.OpenMp.Core.csproj" />
         <ProjectReference Include="..\openmp-sampsharp-x64-poc\src\SampSharp.OpenMp.Entities\SampSharp.OpenMp.Entities.csproj" />
