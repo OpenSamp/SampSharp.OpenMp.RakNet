@@ -1,4 +1,3 @@
-using SampSharp.Entities;
 using SampSharp.Entities.SAMP;
 
 namespace SampSharp.RakNet.Entities;
@@ -24,8 +23,7 @@ public interface IRakNetService
         PacketReliability reliability = PacketReliability.ReliableOrdered,
         byte orderingChannel = 0);
 
-    /// <summary>Удобная перегрузка для EntityId.</summary>
-    bool SendPacket(BitStream bs, EntityId player,
+    bool SendPacket(BitStream bs, Player player,
         PacketPriority priority = PacketPriority.HighPriority,
         PacketReliability reliability = PacketReliability.ReliableOrdered,
         byte orderingChannel = 0);
@@ -35,15 +33,15 @@ public interface IRakNetService
         PacketReliability reliability = PacketReliability.ReliableOrdered,
         byte orderingChannel = 0);
 
-    bool SendRpc(BitStream bs, EntityId player, int rpcId,
+    bool SendRpc(BitStream bs, Player player, int rpcId,
         PacketPriority priority = PacketPriority.HighPriority,
         PacketReliability reliability = PacketReliability.ReliableOrdered,
         byte orderingChannel = 0);
 
     bool EmulateIncomingPacket(BitStream bs, int playerId);
-    bool EmulateIncomingPacket(BitStream bs, EntityId player);
+    bool EmulateIncomingPacket(BitStream bs, Player player);
     bool EmulateIncomingRpc(BitStream bs, int playerId, int rpcId);
-    bool EmulateIncomingRpc(BitStream bs, EntityId player, int rpcId);
+    bool EmulateIncomingRpc(BitStream bs, Player player, int rpcId);
 
     // ----- Custom RPC routing --------------------------------------------
 

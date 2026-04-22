@@ -32,7 +32,7 @@ public partial class RakNet
 
     // SampSharp.OpenMp.RakNet dispatches these as (EntityId, int id, int bsHandle).
     // Declaring `Player player` lets the middleware resolve the Player component
-    // from the EntityId; native playerid is read off `player.Entity.Handle`.
+    // from the EntityId; native playerid is read off `player.Id`.
     //
     // Returning false → veto the packet/RPC at the networking layer. Used by
     // BlockRpc/BlockPacket (see RakNet.cs).
@@ -40,7 +40,7 @@ public partial class RakNet
     [Event]
     public bool OnIncomingRPC(Player player, int rpcid, int bs)
     {
-        int pid = player?.Entity.Handle ?? -1;
+        int pid = player?.Id ?? -1;
         IncomingRpc?.Invoke(this, new PacketRpcEventArgs(rpcid, pid, bs));
         if (LoggingIncomingRpc)
             Console.WriteLine($"[VSRP.RakNet] Hooking Incoming RPC {pid}, {rpcid}, {bs}");
@@ -50,7 +50,7 @@ public partial class RakNet
     [Event]
     public bool OnIncomingCustomRPC(Player player, int rpcid, int bs)
     {
-        int pid = player?.Entity.Handle ?? -1;
+        int pid = player?.Id ?? -1;
         IncomingCustomRpc?.Invoke(this, new PacketRpcEventArgs(rpcid, pid, bs));
         if (LoggingIncomingRpc)
             Console.WriteLine($"[VSRP.RakNet] Hooking Incoming Custom RPC {pid}, {rpcid}, {bs}");
@@ -60,7 +60,7 @@ public partial class RakNet
     [Event]
     public bool OnOutgoingRPC(Player player, int rpcid, int bs)
     {
-        int pid = player?.Entity.Handle ?? -1;
+        int pid = player?.Id ?? -1;
         var args = new PacketRpcEventArgs(rpcid, pid, bs);
         OutgoingRpc?.Invoke(this, args);
         OutcomingRpc?.Invoke(this, args);
@@ -73,7 +73,7 @@ public partial class RakNet
     [Event]
     public bool OnIncomingPacket(Player player, int packetid, int bs)
     {
-        int pid = player?.Entity.Handle ?? -1;
+        int pid = player?.Id ?? -1;
         IncomingPacket?.Invoke(this, new PacketRpcEventArgs(packetid, pid, bs));
         if (LoggingIncomingPacket)
             Console.WriteLine($"[VSRP.RakNet] Hooking Incoming Packet {pid}, {packetid}, {bs}");
@@ -83,7 +83,7 @@ public partial class RakNet
     [Event]
     public bool OnOutgoingPacket(Player player, int packetid, int bs)
     {
-        int pid = player?.Entity.Handle ?? -1;
+        int pid = player?.Id ?? -1;
         var args = new PacketRpcEventArgs(packetid, pid, bs);
         OutgoingPacket?.Invoke(this, args);
         OutcomingPacket?.Invoke(this, args);
