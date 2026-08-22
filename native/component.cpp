@@ -27,7 +27,7 @@ namespace
 
     // ---- Managed callback function pointers ----
     // Each event callback takes (playerId, id, bsHandle) and returns 0/1 (veto/continue).
-    using FnEvent = unsigned char (__cdecl*)(int, int, int);
+    using FnEvent = unsigned char (*)(int, int, int);
 
     FnEvent cb_incomingPacket     = nullptr;
     FnEvent cb_incomingRpc        = nullptr;
