@@ -80,7 +80,9 @@ internal sealed class RakNetEventSystem : ISystem
         if (_dispatcher is null) return 1;
         try
         {
-            var result = _dispatcher.Invoke(name, PlayerEntity(playerId), id, bsHandle);
+            // IEventDispatcher.Invoke is now void; InvokeAs<T> returns the handler
+            // result. Veto semantics (handler returns false => block) are preserved.
+            var result = _dispatcher.InvokeAs<object?>(name, null, PlayerEntity(playerId), id, bsHandle);
             return result is false ? (byte)0 : (byte)1;
         }
         catch
