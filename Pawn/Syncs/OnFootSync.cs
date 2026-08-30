@@ -239,10 +239,15 @@ public class OnFootSync(BitStream bs) : ISync
             ParamType.UInt8, SpecialAction
         );
         BS.WriteVector(Velocity);
-        if (SurfingVehicleId != 0)
+        // Mirror ReadOutcoming: the surf id is 16-bit, and "not surfing" is a
+        // non-positive id (ReadOutcoming yields -1, SendLastSyncPacket uses 0).
+        // Writing it as UInt8 truncated the id and shifted every following bit;
+        // treating -1 as "surfing" emitted a bogus surf block for every walking
+        // player whose outgoing sync passes through the fake-health rewrite.
+        if (SurfingVehicleId > 0)
             BS.WriteValue(
                 ParamType.Bool, true,
-                ParamType.UInt8, SurfingVehicleId,
+                ParamType.UInt16, SurfingVehicleId,
                 ParamType.Float, SurfingOffsets.X,
                 ParamType.Float, SurfingOffsets.Y,
                 ParamType.Float, SurfingOffsets.Z
