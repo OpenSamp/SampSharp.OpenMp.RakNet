@@ -51,8 +51,7 @@ public sealed class RakNetService : IRakNetService
 }
 
 /// <summary>
-/// Статический facade для extension-методов и мест без DI
-/// (см. <see cref="SampSharp.Cef.Entities.CefGlobal"/> для аналогичного паттерна).
+/// Статический facade для extension-методов и мест без DI.
 /// </summary>
 public static class RakNetGlobal
 {
